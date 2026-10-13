@@ -45,14 +45,14 @@ export function AppSidebar() {
         <Sidebar collapsible="icon">
             <SidebarHeader className="flex h-14 shrink-0 items-center gap-2 border-b border-sidebar-border px-4">
                 <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
-                    SG
+                    AM
                 </div>
                 <div className="grid flex-1 leading-tight group-data-[collapsible=icon]:hidden">
                     <p className="truncate text-sm font-semibold">
-                        Sistema Gerenciais
+                        Asset Manager
                     </p>
                     <p className="truncate text-xs text-muted-foreground">
-                        Gestão de Patrimônio
+                        Asset Management
                     </p>
                 </div>
             </SidebarHeader>
@@ -69,7 +69,9 @@ export function AppSidebar() {
                                     size="lg"
                                 >
                                     <Icon />
-                                    <span>{label}</span>
+                                    <span className="group-data-[collapsible=icon]:hidden">
+                                        {label}
+                                    </span>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         ))}

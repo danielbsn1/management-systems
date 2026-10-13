@@ -52,7 +52,8 @@ export default function UsuariosEdit({ usuario }: Props) {
                     <CardContent className="pt-6">
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <Field label="Nome" required error={errors.name}>
-                                <Input
+                                <Input  
+                                 autoComplete="off"
                                     type="text"
                                     placeholder="Nome completo"
                                     value={data.name}
@@ -63,6 +64,7 @@ export default function UsuariosEdit({ usuario }: Props) {
 
                             <Field label="E-mail" required error={errors.email}>
                                 <Input
+                                autoComplete="off"
                                     type="email"
                                     placeholder="usuario@email.com"
                                     value={data.email}
@@ -77,6 +79,7 @@ export default function UsuariosEdit({ usuario }: Props) {
                                 error={errors.password}
                             >
                                 <Input
+                                autoComplete="new-password"
                                     type="password"
                                     placeholder="Mínimo 8 caracteres"
                                     value={data.password}
@@ -90,6 +93,7 @@ export default function UsuariosEdit({ usuario }: Props) {
                                 error={errors.password_confirmation}
                             >
                                 <Input
+                                    autoComplete="new-password"
                                     type="password"
                                     placeholder="Repita a nova senha"
                                     value={data.password_confirmation}

@@ -45,6 +45,8 @@ Desenvolvido com **Laravel 12** + **React (Inertia.js)** + **MySQL**, rodando em
 
 ### Passo a passo
 
+> Credenciais padrão do admin: `admin@admin.com` / `admin123`
+
 **1. Clone o repositório**
 
 ```bash
@@ -95,7 +97,7 @@ docker compose exec app php artisan migrate
 
 **6. Popule com dados de exemplo (opcional)**
 
-Cria o usuário `admin@admin.com` / `password` e dados fictícios para testar:
+Cria o usuário `admin@admin.com` / `admin123` e dados fictícios para testar:
 
 ```bash
 docker compose exec app php artisan db:seed

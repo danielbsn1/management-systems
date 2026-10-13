@@ -1,0 +1,140 @@
+// Sistema Gerenciais — schema de domínio
+// Como usar: abra https://dbdiagram.io/d, crie um diagrama novo e cole este conteúdo
+// (ou "Import" > "DBML file" e selecione este arquivo).
+// Tabelas internas do Laravel (cache, jobs, sessions, password_reset_tokens) foram
+// omitidas por não fazerem parte do domínio de negócio.
+
+Table users {
+  id bigint [pk, increment]
+  name varchar
+  email varchar [unique]
+  email_verified_at timestamp [null]
+  role user_role [default: 'user']
+  password varchar
+  remember_token varchar [null]
+  created_at timestamp
+  updated_at timestamp
+
+  Note: 'Administradores e colaboradores (login único)'
+}
+
+Table funcionarios {
+  id bigint [pk, increment]
+  nome varchar
+  cpf varchar(14) [unique]
+  email varchar [null]
+  telefone varchar(20) [null]
+  setor varchar
+  cargo varchar [null]
+  endereco varchar [null]
+  cidade varchar [null]
+  uf varchar(2) [null]
+  tipo funcionario_tipo [default: 'interno']
+  ativo boolean [default: true]
+  inativo boolean [default: false]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table equipamentos {
+  id bigint [pk, increment]
+  patrimonio_id varchar [unique]
+  tipo equipamento_tipo
+  marca varchar
+  modelo varchar
+  numero_serie varchar [unique, null]
+  processador varchar [null]
+  memoria_ram varchar [null]
+  armazenamento varchar [null]
+  sistema_operacional varchar [null]
+  resolucao varchar [null]
+  tamanho_tela varchar [null]
+  data_aquisicao date [null]
+  valor_aquisicao decimal(10,2) [null]
+  nota_fiscal varchar [null]
+  status equipamento_status [default: 'disponivel']
+  observacoes text [null]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table emprestimos {
+  id bigint [pk, increment]
+  equipamento_id bigint [ref: > equipamentos.id]
+  funcionario_id bigint [ref: > funcionarios.id]
+  admin_id bigint [ref: > users.id]
+  data_saida datetime
+  data_devolucao datetime [null]
+  status emprestimo_status [default: 'ativo']
+  observacoes text [null]
+  created_at timestamp
+  updated_at timestamp
+
+  Note: 'admin_id: usuário que registrou o empréstimo'
+}
+
+Table solicitacoes {
+  id bigint [pk, increment]
+  user_id bigint [ref: > users.id]
+  tipo_equipamento varchar
+  motivo varchar
+  urgencia solicitacao_urgencia [default: 'media']
+  observacoes text [null]
+  status solicitacao_status [default: 'pendente']
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table notifications {
+  id uuid [pk]
+  type varchar
+  notifiable_type varchar
+  notifiable_id bigint
+  data text
+  read_at timestamp [null]
+  created_at timestamp
+  updated_at timestamp
+
+  Note: 'Relação polimórfica (notifiable_type + notifiable_id) — hoje sempre aponta para users, por isso sem FK explícita no diagrama'
+}
+
+Enum user_role {
+  admin
+  user
+}
+
+Enum funcionario_tipo {
+  interno
+  prefeitura
+}
+
+Enum equipamento_tipo {
+  tablet
+  notebook
+  desktop
+  monitor
+}
+
+Enum equipamento_status {
+  disponivel
+  em_uso
+  manutencao
+  inativo
+}
+
+Enum emprestimo_status {
+  ativo
+  devolvido
+}
+
+Enum solicitacao_urgencia {
+  baixa
+  media
+  alta
+}
+
+Enum solicitacao_status {
+  pendente
+  aprovada
+  recusada
+}

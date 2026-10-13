@@ -17,6 +17,7 @@ interface Props {
     funcionarios: number;
     porTipo: Record<string, number>;
     porStatus: Record<string, number>;
+    porUso: Record<string, number>;
 }
 
 export default function Dashboard({
@@ -28,6 +29,7 @@ export default function Dashboard({
     funcionarios,
     porTipo,
     porStatus,
+    porUso,
 }: Props) {
     return (
         <AppLayout>
@@ -75,7 +77,7 @@ export default function Dashboard({
                 />
             </div>
 
-            <ChartPieInteractive porTipo={porTipo} porStatus={porStatus} />
+            <ChartPieInteractive porTipo={porTipo} porStatus={porStatus} porUso={porUso} />
         </AppLayout>
     );
 }

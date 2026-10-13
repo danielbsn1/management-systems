@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 
-type View = "tipo" | "status"
+type View = "tipo" | "status" | "uso"
 
 interface SliceConfig {
     key: string
@@ -55,6 +55,11 @@ const STATUS: SliceConfig[] = [
     { key: "inativo", label: "Inativo", color: "var(--chart-4)" },
 ]
 
+const USO: SliceConfig[] = [
+    { key: "usados", label: "Usados", color: "var(--chart-2)" },
+    { key: "nao_usados", label: "Não usados", color: "var(--chart-5)" },
+]
+
 const FALLBACK_PALETTE = [
     "var(--chart-1)",
     "var(--chart-2)",
@@ -75,6 +80,8 @@ const chartConfig: ChartConfig = {
     em_uso: { label: "Em Uso", color: "var(--chart-2)" },
     manutencao: { label: "Manutenção", color: "var(--chart-3)" },
     inativo: { label: "Inativo", color: "var(--chart-4)" },
+    usados: { label: "Usados", color: "var(--chart-2)" },
+    nao_usados: { label: "Não usados", color: "var(--chart-5)" },
 }
 
 function buildData(
@@ -108,15 +115,16 @@ function buildData(
 interface ChartPieInteractiveProps {
     porTipo: Record<string, number>
     porStatus?: Record<string, number>
+    porUso?: Record<string, number>
 }
 
-export function ChartPieInteractive({ porTipo, porStatus = {} }: ChartPieInteractiveProps) {
+export function ChartPieInteractive({ porTipo, porStatus = {}, porUso = {} }: ChartPieInteractiveProps) {
     const id = "pie-interactive"
 
     const [view, setView] = React.useState<View>("tipo")
 
-    const source = view === "tipo" ? porTipo : porStatus
-    const configList = view === "tipo" ? TIPOS : STATUS
+    const source = view === "tipo" ? porTipo : view === "status" ? porStatus : porUso
+    const configList = view === "tipo" ? TIPOS : view === "status" ? STATUS : USO
 
     const data = React.useMemo(
         () => buildData(source, configList),
@@ -183,6 +191,7 @@ export function ChartPieInteractive({ porTipo, porStatus = {} }: ChartPieInterac
                             [
                                 { value: "tipo", label: "Por tipo" },
                                 { value: "status", label: "Por status" },
+                                { value: "uso", label: "Usados / Não usados" },
                             ] as const
                         ).map((option) => (
                             <button
@@ -262,7 +271,8 @@ export function ChartPieInteractive({ porTipo, porStatus = {} }: ChartPieInterac
                                                 <tspan
                                                     x={viewBox.cx}
                                                     y={viewBox.cy}
-                                                    className="fill-foreground text-3xl font-bold"
+                                                    className="text-3xl font-bold"
+                                                    style={{ fill: activeIndex >= 0 ? data[activeIndex].fill : undefined }}
                                                 >
                                                     {activeIndex >= 0
                                                         ? data[activeIndex].valor.toLocaleString("pt-BR")
@@ -273,7 +283,9 @@ export function ChartPieInteractive({ porTipo, porStatus = {} }: ChartPieInterac
                                                     y={(viewBox.cy || 0) + 24}
                                                     className="fill-muted-foreground"
                                                 >
-                                                    Equipamentos
+                                                    {activeIndex >= 0
+                                                        ? data[activeIndex].label
+                                                        : "Equipamentos"}
                                                 </tspan>
                                             </text>
                                         )
