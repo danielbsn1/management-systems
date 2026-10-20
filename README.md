@@ -1,4 +1,4 @@
-# sistema-gerenciais
+# management-systems
 
 Sistema web para gerenciamento de patrimônio empresarial: controle de **equipamentos**, **funcionários**, **empréstimos** e **solicitações**, com painel de relatórios e notificações.
 
@@ -131,40 +131,6 @@ App\Models\User::create([
 
 ---
 
-## Demonstração
-
-### Dashboard
-
-Visão geral do sistema com métricas principais como total de equipamentos, disponíveis, em uso, em manutenção e quantidade de funcionários.
-
-<img width="1443" height="811" alt="image" src="https://github.com/user-attachments/assets/21277d63-4181-4a84-9a6d-7b8e7303f457" />
-
----
-
-### Gestão de Equipamentos
-
-Tela de gerenciamento dos ativos cadastrados, com filtros por tipo e status, permitindo controle completo do inventário.
-
-<img width="1446" height="812" alt="image" src="https://github.com/user-attachments/assets/1099e8de-5953-461b-9a28-154a21832061" />
-
----
-
-### Gestão de Funcionários
-
-Visualização e controle dos funcionários, incluindo vínculo com equipamentos e informações organizacionais.
-
-<img width="1450" height="812" alt="image" src="https://github.com/user-attachments/assets/82a51dec-e947-451a-96e0-5374c55e52ef" />
-
----
-
-### Gestão de Empréstimos de Equipamentos
-
-Visualização e controle dos empréstimos, incluindo vínculo com equipamentos e informações organizacionais.
-
-<img width="1455" height="808" alt="image" src="https://github.com/user-attachments/assets/843685cd-3225-4eab-9ebb-1501991701b8" />
-
----
-
 ## Instalação Manual (sem Docker)
 
 ### Pré-requisitos
@@ -265,6 +231,9 @@ Siga o passo a passo completo (VPS Hostinger com Pix, SSL, backups) em [**DEPLOY
 - Middleware de cabeçalhos de segurança (CSP, `X-Frame-Options`, etc.)
 
 ---
+
+## Manual 
+https://asset-manager-manual-3paq.vercel.app/
 
 ## Autor
 
