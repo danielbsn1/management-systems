@@ -48,6 +48,7 @@ export default function UsuariosCreate() {
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <Field label="Nome" required error={errors.name}>
                                 <Input
+                                autoComplete="off"
                                     type="text"
                                     placeholder="Nome completo"
                                     value={data.name}
@@ -58,6 +59,7 @@ export default function UsuariosCreate() {
 
                             <Field label="E-mail" required error={errors.email}>
                                 <Input
+                                autoComplete="off"
                                     type="email"
                                     placeholder="usuario@email.com"
                                     value={data.email}
@@ -68,6 +70,7 @@ export default function UsuariosCreate() {
 
                             <Field label="Senha" required error={errors.password}>
                                 <Input
+                                autoComplete="new-password"
                                     type="password"
                                     placeholder="Mínimo 8 caracteres"
                                     value={data.password}
@@ -82,6 +85,7 @@ export default function UsuariosCreate() {
                                 error={errors.password_confirmation}
                             >
                                 <Input
+                                autoComplete="new-password"
                                     type="password"
                                     placeholder="Repita a senha"
                                     value={data.password_confirmation}

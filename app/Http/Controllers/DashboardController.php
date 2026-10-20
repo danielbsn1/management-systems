@@ -21,6 +21,10 @@ class DashboardController extends Controller
             'porTipo'           => Equipamento::selectRaw('tipo, count(*) as total')
                                     ->groupBy('tipo')
                                     ->pluck('total', 'tipo'),
+            'porUso'            => [
+                'usados'     => Equipamento::whereIn('status', ['em_uso', 'manutencao', 'inativo'])->count(),
+                'nao_usados' => Equipamento::where('status', 'disponivel')->count(),
+            ],
             'porStatus'         => Equipamento::selectRaw('status, count(*) as total')
                                     ->groupBy('status')
                                     ->pluck('total', 'status'),

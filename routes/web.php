@@ -57,7 +57,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/equipamentos/{equipamento}', [EquipamentoController::class, 'destroy'])
         ->name('equipamentos.destroy');
 
-    Route::resource('usuarios', UserController::class)->except('show');
+    Route::resource('usuarios', UserController::class)
+    ->parameters(['usuarios' => 'user'])
+    ->except('show');
 
     Route::get('/funcionarios', [FuncionarioController::class, 'index'])
         ->name('funcionarios.index');

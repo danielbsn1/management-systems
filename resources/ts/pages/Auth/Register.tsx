@@ -28,7 +28,7 @@ export default function Register() {
         <div className="flex min-h-svh items-center justify-center bg-background p-4">
             <Card className="w-full max-w-sm">
                 <CardHeader className="text-center">
-                    <CardTitle className="text-xl">Sistema Gerenciais</CardTitle>
+                    <CardTitle className="text-xl">Asset Manager</CardTitle>
                     <CardDescription>
                         Crie sua conta para solicitar equipamentos
                     </CardDescription>

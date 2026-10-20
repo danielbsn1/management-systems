@@ -13,17 +13,23 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::firstOrCreate(['email' => 'admin@admin.com'], [
-            'name'     => 'Administrador',
-            'password' => bcrypt('password'),
-            'role'     => 'admin',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@admin.com'],
+            [
+                'name'     => 'Administrador',
+                'password' => bcrypt('admin123'),
+                'role'     => 'admin',
+            ]
+        );
 
-        User::firstOrCreate(['email' => 'colaborador@colaborador.com'], [
-            'name'     => 'Colaborador',
-            'password' => bcrypt('password'),
-            'role'     => 'user',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'colaborador@colaborador.com'],
+            [
+                'name'     => 'Colaborador',
+                'password' => bcrypt('password'),
+                'role'     => 'user',
+            ]
+        );
 
         Funcionario::factory(20)->create();
         Equipamento::factory(20)->create();
